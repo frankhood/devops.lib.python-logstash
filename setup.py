@@ -1,6 +1,6 @@
 from distutils.core import setup
 setup(
-    name='devops.lib.python-logstash',
+    name='devops.lib.logstash',
     packages=['logstash'],
     version='1.0.0',
     description='SAJ DevOps Python logging handler for Logstash.',
