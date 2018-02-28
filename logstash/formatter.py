@@ -3,6 +3,7 @@ import logging
 import socket
 import sys
 from datetime import datetime
+
 try:
     import json
 except ImportError:
@@ -11,9 +12,9 @@ except ImportError:
 
 class LogstashFormatterBase(logging.Formatter):
 
-    def __init__(self, message_type='Logstash', tags=None, fqdn=False):
+    def __init__(self, message_type='Logstash', tag=None, fqdn=False):
         self.message_type = message_type
-        self.tags = tags if tags is not None else []
+        self.tag = tag
 
         if fqdn:
             self.host = socket.getfqdn()
@@ -84,6 +85,7 @@ class LogstashFormatterBase(logging.Formatter):
         else:
             return bytes(json.dumps(message), 'utf-8')
 
+
 class LogstashFormatterVersion0(LogstashFormatterBase):
     version = 0
 
@@ -96,7 +98,7 @@ class LogstashFormatterVersion0(LogstashFormatterBase):
                                           record.pathname),
             '@source_host': self.host,
             '@source_path': record.pathname,
-            '@tags': self.tags,
+            '@tag': self.tag,
             '@type': self.message_type,
             '@fields': {
                 'levelname': record.levelname,
@@ -124,11 +126,12 @@ class LogstashFormatterVersion1(LogstashFormatterBase):
             'message': record.getMessage(),
             'host': self.host,
             'path': record.pathname,
-            'tags': self.tags,
+            'tag': self.tag,
             'type': self.message_type,
 
             # Extra Fields
-            'level': record.levelname,
+            'level': record.levelno,
+            'levelstr': record.levelname,
             'logger_name': record.name,
         }
 
