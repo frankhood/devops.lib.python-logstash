@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
     name='devops.lib.python-logstash',
     packages=['logstash'],
-    version='1.0.0',
+    version='2.0.0',
     description='SAJ DevOps Python logging handler for Logstash.',
     long_description=open('README.rst').read(),
     license='MIT',
-    author='Volodymyr Klochan',
-    author_email='vklochan@gmail.com',
-    url='https://github.com/vklochan/python-logstash',
+    author='Jordan Mance',
+    author_email='jordan.mance@snagajob.com',
+    url='https://github.com/Snagajob/devops.lib.python-logstash',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
