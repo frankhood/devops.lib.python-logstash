@@ -56,11 +56,11 @@ class LogstashFormatterBase(logging.Formatter):
         }
 
         # funcName was added in 2.5
-        if not getattr(record, 'funcName', None):
+        if getattr(record, 'funcName', None):
             fields['funcName'] = record.funcName
 
         # processName was added in 2.6
-        if not getattr(record, 'processName', None):
+        if getattr(record, 'processName', None):
             fields['processName'] = record.processName
 
         return fields
